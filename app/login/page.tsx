@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react"
+import React from "react";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -49,15 +49,17 @@ export default function LoginPage() {
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-              <Leaf className="w-6 h-6 text-white" />
+            <div className="w-18 h-18 flex items-center justify-center shadow-md">
+              <img
+                src="logo.png"
+                alt="Logo"
+                className="w-full h-auto text-white"
+              />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">
-            BioExplorer Pro
-          </h1>
+          <h1 className="text-3xl font-bold text-foreground mb-2">SIGMA</h1>
           <p className="text-muted-foreground">
-            Advanced Biology Academic Portal
+            Integrated Academic & Golden Star Monitoring
           </p>
         </div>
 
@@ -126,7 +128,7 @@ export default function LoginPage() {
 
         {/* Footer */}
         <p className="text-xs text-muted-foreground text-center mt-6">
-          BioExplorer Pro © 2024 - Biology Academic Portal
+          SIGMA © 2026 - Integrated Academic & Golden Star Monitoring
         </p>
       </div>
     </div>
