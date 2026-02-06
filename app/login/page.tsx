@@ -49,7 +49,7 @@ export default function LoginPage() {
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-18 h-18 flex items-center justify-center shadow-md">
+            <div className="w-40 h-40 flex items-center justify-center shadow-md">
               <img
                 src="logo.png"
                 alt="Logo"
@@ -58,9 +58,7 @@ export default function LoginPage() {
             </div>
           </div>
           <h1 className="text-3xl font-bold text-foreground mb-2">SIGMA</h1>
-          <p className="text-muted-foreground">
-            Integrated Academic & Golden Star Monitoring
-          </p>
+          <p className="text-muted-foreground">Biology Performence Tracker</p>
         </div>
 
         {/* Login Card */}
@@ -128,7 +126,7 @@ export default function LoginPage() {
 
         {/* Footer */}
         <p className="text-xs text-muted-foreground text-center mt-6">
-          SIGMA © 2026 - Integrated Academic & Golden Star Monitoring
+          SIGMA © 2026 - Biology Performance Tracker
         </p>
       </div>
     </div>
