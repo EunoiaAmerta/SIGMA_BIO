@@ -15,7 +15,7 @@ export default function LoginPage() {
   const router = useRouter();
   const { login, isLoading, error } = useAuth();
   const [email, setEmail] = useState("");
-  const [nisn, setNisn] = useState("");
+  const [nis, setNis] = useState("");
   const [localError, setLocalError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,13 +27,13 @@ export default function LoginPage() {
       return;
     }
 
-    if (!nisn.trim()) {
-      setLocalError("NISN is required");
+    if (!nis.trim()) {
+      setLocalError("Password is required");
       return;
     }
 
     try {
-      await login(email, nisn);
+      await login(email, nis);
       // Redirect after successful login
       setTimeout(() => {
         router.push("/dashboard");
@@ -58,7 +58,7 @@ export default function LoginPage() {
             </div>
           </div>
           <h1 className="text-3xl font-bold text-foreground mb-2">SIGMA</h1>
-          <p className="text-muted-foreground">Biology Performence Tracker</p>
+          <p className="text-muted-foreground">Biology Performance Tracker</p>
         </div>
 
         {/* Login Card */}
@@ -82,13 +82,13 @@ export default function LoginPage() {
             {/* NISN Input */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-foreground">
-                NISN
+                Password
               </label>
               <Input
                 type="text"
-                placeholder="Your NISN"
-                value={nisn}
-                onChange={(e) => setNisn(e.target.value)}
+                placeholder="Your Password"
+                value={nis}
+                onChange={(e) => setNis(e.target.value)}
                 disabled={isLoading}
                 className="h-10"
               />
@@ -120,7 +120,8 @@ export default function LoginPage() {
 
           {/* Info Text */}
           <p className="text-xs text-muted-foreground text-center mt-4">
-            Use your email address and NISN to access your academic dashboard.
+            Use your email address and password to access your academic
+            dashboard.
           </p>
         </Card>
 
