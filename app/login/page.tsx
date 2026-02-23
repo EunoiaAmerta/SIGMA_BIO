@@ -16,7 +16,19 @@ export default function LoginPage() {
   const { login, isLoading, error } = useAuth();
   const [email, setEmail] = useState("");
   const [nis, setNis] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
+
+  // Load saved credentials on mount
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedEmail = localStorage.getItem("rememberedEmail");
+      const savedNis = localStorage.getItem("rememberedNis");
+      if (savedEmail) setEmail(savedEmail);
+      if (savedNis) setNis(savedNis);
+      if (savedEmail || savedNis) setRememberMe(true);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +44,15 @@ export default function LoginPage() {
       return;
     }
 
+    // Save credentials if remember me is checked
+    if (rememberMe) {
+      localStorage.setItem("rememberedEmail", email);
+      localStorage.setItem("rememberedNis", nis);
+    } else {
+      localStorage.removeItem("rememberedEmail");
+      localStorage.removeItem("rememberedNis");
+    }
+
     try {
       await login(email, nis);
       // Redirect after successful login
@@ -44,25 +65,78 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center p-4">
+    <div
+      className="min-h-screen bg-[#06370b] flex items-center justify-center p-4"
+      style={{
+        backgroundColor: "#06370b",
+      }}
+    >
+      {/* Force light mode styles */}
+      <style jsx global>{`
+        :root {
+          --background: #ffffff !important;
+          --foreground: #000000 !important;
+          --card: #ffffff !important;
+          --card-foreground: #000000 !important;
+          --popover: #ffffff !important;
+          --popover-foreground: #000000 !important;
+          --primary: #06370b !important;
+          --primary-foreground: #ffffff !important;
+          --secondary: #f3f4f6 !important;
+          --secondary-foreground: #000000 !important;
+          --muted: #f3f4f6 !important;
+          --muted-foreground: #000000 !important;
+          --accent: #f3f4f6 !important;
+          --accent-foreground: #000000 !important;
+          --destructive: #ef4444 !important;
+          --destructive-foreground: #ffffff !important;
+          --border: #e5e7eb !important;
+          --input: #e5e7eb !important;
+          --ring: #06370b !important;
+        }
+        .dark {
+          --background: #ffffff !important;
+          --foreground: #000000 !important;
+          --card: #ffffff !important;
+          --card-foreground: #000000 !important;
+          --popover: #ffffff !important;
+          --popover-foreground: #000000 !important;
+          --primary: #06370b !important;
+          --primary-foreground: #ffffff !important;
+          --secondary: #f3f4f6 !important;
+          --secondary-foreground: #000000 !important;
+          --muted: #f3f4f6 !important;
+          --muted-foreground: #000000 !important;
+          --accent: #f3f4f6 !important;
+          --accent-foreground: #000000 !important;
+          --destructive: #ef4444 !important;
+          --destructive-foreground: #ffffff !important;
+          --border: #e5e7eb !important;
+          --input: #e5e7eb !important;
+          --ring: #06370b !important;
+        }
+      `}</style>
+
       <div className="w-full max-w-md">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-40 h-40 flex items-center justify-center shadow-md">
-              <img
-                src="logo.png"
-                alt="Logo"
-                className="w-full h-auto text-white"
-              />
-            </div>
-          </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">SIGMA</h1>
-          <p className="text-muted-foreground">Biology Performance Tracker</p>
+        {/* Header - Outside the card, above logo */}
+        <div className="text-center mb-6">
+          <h1 className="text-6xl font-bold text-white mb-1">SIGMA</h1>
+          <p className="text-2xl text-white">
+            Sistem Informasi Golden Star dan Monitoring Akademik
+          </p>
         </div>
 
         {/* Login Card */}
-        <Card className="p-6 shadow-lg border-0">
+        <Card className="p-6 shadow-lg border-0 bg-white/70">
+          {/* Logo inside the login box */}
+          <div className="flex items-center justify-center mb-6">
+            <img
+              src="/logo_sekolah.png"
+              alt="Logo Sekolah"
+              className="w-24 h-auto"
+            />
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email Input */}
             <div className="space-y-2">
@@ -85,13 +159,27 @@ export default function LoginPage() {
                 Password
               </label>
               <Input
-                type="text"
+                type="password"
                 placeholder="Your Password"
                 value={nis}
                 onChange={(e) => setNis(e.target.value)}
                 disabled={isLoading}
                 className="h-10"
               />
+            </div>
+
+            {/* Remember Me */}
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="rememberMe"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="w-4 h-4 mr-2"
+              />
+              <label htmlFor="rememberMe" className="text-sm text-foreground">
+                Remember username and password
+              </label>
             </div>
 
             {/* Error Message */}
@@ -126,9 +214,12 @@ export default function LoginPage() {
         </Card>
 
         {/* Footer */}
-        <p className="text-xs text-muted-foreground text-center mt-6">
-          SIGMA © 2026 - Biology Performance Tracker
-        </p>
+        <div className="text-center mt-6">
+          <img src="/logo.png" alt="Logo" className="w-64 h-auto mx-auto" />
+          <p className="text-2xl text-yellow-400 italic mt-2">
+            Pantau Prestasi, Bangun Motivasi
+          </p>
+        </div>
       </div>
     </div>
   );
