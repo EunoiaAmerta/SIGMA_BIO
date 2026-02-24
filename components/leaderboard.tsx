@@ -33,29 +33,29 @@ export function Leaderboard({
 
   return (
     <Card className="border-0 shadow-lg overflow-hidden">
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-foreground">
+      <div className="p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-6">
+          <h2 className="text-lg sm:text-xl font-bold text-foreground">
             Top 10 Leaderboard
           </h2>
-          <Badge variant="outline" className="gap-1">
+          <Badge variant="outline" className="gap-1 self-start sm:self-center">
             <Flame className="w-3 h-3 text-orange-500" />
             {topStudents.length} Students
           </Badge>
         </div>
 
-        {/* Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full">
+        {/* Table - Horizontal scroll on mobile */}
+        <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+          <table className="w-full min-w-[300px] sm:min-w-0">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-3 px-4 font-semibold text-sm text-muted-foreground">
+                <th className="text-left py-2.5 sm:py-3 px-2 sm:px-4 font-semibold text-xs sm:text-sm text-muted-foreground">
                   Rank
                 </th>
-                <th className="text-left py-3 px-4 font-semibold text-sm text-muted-foreground">
+                <th className="text-left py-2.5 sm:py-3 px-2 sm:px-4 font-semibold text-xs sm:text-sm text-muted-foreground">
                   Student Name
                 </th>
-                <th className="text-right py-3 px-4 font-semibold text-sm text-muted-foreground">
+                <th className="text-right py-2.5 sm:py-3 px-2 sm:px-4 font-semibold text-xs sm:text-sm text-muted-foreground">
                   GS Balance
                 </th>
               </tr>
@@ -68,28 +68,32 @@ export function Leaderboard({
                     className={`border-b border-border transition-colors hover:bg-accent/50`}
                   >
                     {/* Rank */}
-                    <td className="py-4 px-4">
+                    <td className="py-3 sm:py-4 px-2 sm:px-4">
                       <Badge
                         className={`${getRankBadgeColor(
-                          index
-                        )} border-0 font-bold`}
+                          index,
+                        )} border-0 font-bold text-xs sm:text-sm`}
                       >
                         {getMedalEmoji(index)}
                       </Badge>
                     </td>
 
                     {/* Name */}
-                    <td className="py-4 px-4">
+                    <td className="py-3 sm:py-4 px-2 sm:px-4">
                       <div>
-                        <p className={`font-medium text-foreground`}>
+                        <p
+                          className={`font-medium text-foreground text-sm sm:text-base truncate max-w-[150px] sm:max-w-none`}
+                        >
                           {student.nama}
                         </p>
                       </div>
                     </td>
 
                     {/* GS Balance */}
-                    <td className="py-4 px-4 text-right">
-                      <span className={`font-bold text-lg text-foreground`}>
+                    <td className="py-3 sm:py-4 px-2 sm:px-4 text-right">
+                      <span
+                        className={`font-bold text-base sm:text-lg text-foreground`}
+                      >
                         {student.saldo}
                       </span>
                     </td>

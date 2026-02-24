@@ -66,7 +66,7 @@ export default function LoginPage() {
 
   return (
     <div
-      className="min-h-screen bg-[#06370b] flex items-center justify-center p-4"
+      className="min-h-screen bg-[#06370b] flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-hidden"
       style={{
         backgroundColor: "#06370b",
       }}
@@ -117,30 +117,32 @@ export default function LoginPage() {
         }
       `}</style>
 
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md max-h-screen overflow-hidden flex flex-col">
         {/* Header - Outside the card, above logo */}
-        <div className="text-center mb-6">
-          <h1 className="text-6xl font-bold text-white mb-1">SIGMA</h1>
-          <p className="text-2xl text-white">
+        <div className="text-center mb-2 sm:mb-3">
+          <h1 className="text-clamp-2xl sm:text-clamp-3xl font-bold text-white mb-0.5 sm:mb-1">
+            SIGMA
+          </h1>
+          <p className="text-xs text-white leading-tight">
             Sistem Informasi Golden Star dan Monitoring Akademik
           </p>
         </div>
 
         {/* Login Card */}
-        <Card className="p-6 shadow-lg border-0 bg-white/70">
+        <Card className="p-3 sm:p-4 shadow-lg border-0 bg-white/70 flex-shrink-0">
           {/* Logo inside the login box */}
-          <div className="flex items-center justify-center mb-6">
+          <div className="flex items-center justify-center mb-2 sm:mb-3">
             <img
               src="/logo_sekolah.png"
               alt="Logo Sekolah"
-              className="w-24 h-auto"
+              className="w-14 h-auto sm:w-16 md:w-20"
             />
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3">
             {/* Email Input */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">
+            <div className="space-y-1">
+              <label className="text-xs sm:text-sm font-medium text-foreground">
                 Email Address
               </label>
               <Input
@@ -149,13 +151,13 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
-                className="h-10"
+                className="h-9 sm:h-10"
               />
             </div>
 
             {/* NISN Input */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">
+            <div className="space-y-1">
+              <label className="text-xs sm:text-sm font-medium text-foreground">
                 Password
               </label>
               <Input
@@ -164,7 +166,7 @@ export default function LoginPage() {
                 value={nis}
                 onChange={(e) => setNis(e.target.value)}
                 disabled={isLoading}
-                className="h-10"
+                className="h-9 sm:h-10"
               />
             </div>
 
@@ -175,17 +177,19 @@ export default function LoginPage() {
                 id="rememberMe"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                className="w-4 h-4 mr-2"
+                className="w-3 h-3 mr-2"
               />
-              <label htmlFor="rememberMe" className="text-sm text-foreground">
+              <label htmlFor="rememberMe" className="text-xs text-foreground">
                 Remember username and password
               </label>
             </div>
 
             {/* Error Message */}
             {(error || localError) && (
-              <Alert variant="destructive">
-                <AlertDescription>{error || localError}</AlertDescription>
+              <Alert variant="destructive" className="py-2">
+                <AlertDescription className="text-xs">
+                  {error || localError}
+                </AlertDescription>
               </Alert>
             )}
 
@@ -193,11 +197,11 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-10 bg-primary hover:bg-primary/90 text-white font-medium"
+              className="w-full h-9 sm:h-10 bg-primary hover:bg-primary/90 text-white font-medium text-sm"
             >
               {isLoading ? (
                 <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  <Loader2 className="w-3 h-3 mr-1.5 animate-spin" />
                   Logging in...
                 </>
               ) : (
@@ -207,16 +211,20 @@ export default function LoginPage() {
           </form>
 
           {/* Info Text */}
-          <p className="text-xs text-muted-foreground text-center mt-4">
+          <p className="text-[10px] text-muted-foreground text-center mt-2">
             Use your email address and password to access your academic
             dashboard.
           </p>
         </Card>
 
         {/* Footer */}
-        <div className="text-center mt-6">
-          <img src="/logo.png" alt="Logo" className="w-64 h-auto mx-auto" />
-          <p className="text-2xl text-yellow-400 italic mt-2">
+        <div className="text-center mt-2 sm:mt-3 flex-shrink-0">
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="w-32 h-auto sm:w-40 md:w-48 mx-auto"
+          />
+          <p className="text-xs text-yellow-400 italic mt-1">
             Pantau Prestasi, Bangun Motivasi
           </p>
         </div>

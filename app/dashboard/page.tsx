@@ -57,7 +57,7 @@ export default function DashboardPage() {
   const { user } = useAuth();
 
   const [studentData, setStudentData] = useState<StudentApiResponse | null>(
-    null
+    null,
   );
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -80,7 +80,7 @@ export default function DashboardPage() {
         const data = await fetchStudentData(
           user.email,
           user.nisn || "",
-          getSemesterNum(targetSem)
+          getSemesterNum(targetSem),
         );
         setStudentData(data);
         setError(null);
@@ -91,7 +91,7 @@ export default function DashboardPage() {
         setIsRefreshing(false);
       }
     },
-    [user?.email, user?.nisn, semester] // Hanya refresh jika info user atau semester berubah
+    [user?.email, user?.nisn, semester], // Hanya refresh jika info user atau semester berubah
   );
 
   // FIXED: Dependency array dibuat konstan agar tidak memicu error "changed size"
@@ -102,7 +102,7 @@ export default function DashboardPage() {
   }, [user?.email, loadData]);
 
   const handleSemesterChange = (
-    newSem: "Semester Ganjil" | "Semester Genap"
+    newSem: "Semester Ganjil" | "Semester Genap",
   ) => {
     setSemester(newSem);
     setStudentData(null);
@@ -147,9 +147,9 @@ export default function DashboardPage() {
         displayClass={studentData?.profile?.kelas}
       />
 
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-8 flex justify-between items-center">
-          <h2 className="text-2xl font-bold">Dashboard</h2>
+      <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4">
+          <h2 className="text-xl sm:text-2xl font-bold">Dashboard</h2>
           <SemesterSelector
             currentSemester={semester}
             onSemesterChange={handleSemesterChange}
