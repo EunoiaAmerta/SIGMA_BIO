@@ -4,9 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
+  --background: #b9cfbd;
   --foreground: #1f2937;
-  --card: #f9fafb;
+  --card: #ffffff;
   --card-foreground: #1f2937;
   --popover: #ffffff;
   --popover-foreground: #1f2937;
@@ -46,37 +46,37 @@
 }
 
 .dark {
-  --background: #0f172a;
+  --background: #304633;
   --foreground: #f1f5f9;
-  --card: #1e293b;
+  --card: #1e3a1f;
   --card-foreground: #f1f5f9;
-  --popover: #1e293b;
+  --popover: #1e3a1f;
   --popover-foreground: #f1f5f9;
   --primary: #10b981;
   --primary-foreground: #ffffff;
-  --secondary: #064e3b;
+  --secondary: #1a3320;
   --secondary-foreground: #d1fae5;
-  --muted: #334155;
-  --muted-foreground: #cbd5e1;
+  --muted: #1a3320;
+  --muted-foreground: #9ca3af;
   --accent: #047857;
   --accent-foreground: #d1fae5;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #334155;
-  --input: #334155;
+  --border: #2d4a30;
+  --input: #2d4a30;
   --ring: #10b981;
   --chart-1: #10b981;
   --chart-2: #6ee7b7;
   --chart-3: #a7f3d0;
   --chart-4: #d1fae5;
   --chart-5: #ecfdf5;
-  --sidebar: #1e293b;
+  --sidebar: #1e3a1f;
   --sidebar-foreground: #f1f5f9;
   --sidebar-primary: #10b981;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #047857;
   --sidebar-accent-foreground: #d1fae5;
-  --sidebar-border: #334155;
+  --sidebar-border: #2d4a30;
   --sidebar-ring: #10b981;
   --shadow-x: 0px;
   --shadow-y: 1px;
@@ -216,7 +216,7 @@
     font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
   }
   .text-clamp-2xl {
-    font-size: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
+    font-size: clamp(3rem, 2.6rem + 2vw, 3.75rem);
   }
   .text-clamp-3xl {
     font-size: clamp(1.875rem, 1.6rem + 1.375vw, 2.25rem);
@@ -251,5 +251,90 @@
   }
   .gap-clamp-lg {
     gap: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+  }
+
+  /* Grid Background & Neon Effects */
+  :root {
+    --grid-color: #000000;
+    --grid-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    --neon-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .dark {
+    --grid-color: #ffffff;
+    --grid-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    --neon-color: rgba(255, 255, 255, 0.8);
+  }
+
+  body {
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: -1px -1px;
+    box-shadow: inset 0 0 100px var(--grid-shadow);
+  }
+
+  /* Neon Card Effects */
+  [data-slot="card"] {
+    position: relative;
+    overflow: visible;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: all 0.3s ease;
+  }
+
+  [data-slot="card"]::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(
+      45deg,
+      var(--neon-color),
+      transparent,
+      var(--neon-color)
+    );
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.7;
+    box-shadow: 0 0 15px var(--neon-color);
+    /* Always visible, removed transition */
+  }
+
+  [data-slot="card"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .dark [data-slot="card"]:hover {
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Shadow for Login Card */
+  .shadow-neon-login {
+    box-shadow:
+      0 0 5px rgba(255, 255, 255, 0.8),
+      0 0 15px rgba(255, 255, 255, 0.6),
+      -5px 0 10px 10px rgba(255, 255, 255, 0.5),
+      5px 0 10px 10px rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .shadow-neon-login::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+    z-index: -1;
   }
 }

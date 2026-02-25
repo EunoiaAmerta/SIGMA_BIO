@@ -45,7 +45,7 @@ export function DashboardHeader({
               />
             </div>
             <div className="min-w-0">
-              <h1 className="text-lg sm:text-xl font-bold text-foreground truncate">
+              <h1 className="text-lg sm:text-xl font-bold text-foreground truncate font-lusitana">
                 SIGMA
               </h1>
               <p className="text-xs sm:text-sm text-muted-foreground truncate">

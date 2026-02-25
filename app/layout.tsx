@@ -11,6 +11,9 @@ import {
   Inter as V0_Font_Inter,
   Geist_Mono as V0_Font_Geist_Mono,
   Source_Serif_4 as V0_Font_Source_Serif_4,
+  Pacifico,
+  Crimson_Text,
+  Kalam,
 } from "next/font/google";
 
 // Initialize fonts
@@ -25,6 +28,21 @@ const _geistMono = V0_Font_Geist_Mono({
 const _sourceSerif_4 = V0_Font_Source_Serif_4({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+});
+const pacifico = Pacifico({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-pacifico",
+});
+const crimsonText = Crimson_Text({
+  weight: "700",
+  subsets: ["latin"],
+  variable: "--font-crimson-text",
+});
+const kalam = Kalam({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-kalam",
 });
 
 export const metadata: Metadata = {
@@ -65,7 +83,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans antialiased`}>
+      <body
+        className={`font-sans antialiased ${pacifico.variable} ${crimsonText.variable} ${kalam.variable}`}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>{children}</AuthProvider>
         </ThemeProvider>

@@ -1,24 +1,24 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth-provider";
 import { DashboardHeader } from "@/components/dashboard-header";
 import { SemesterSelector } from "@/components/semester-selector";
 import { RankCard } from "@/components/rank-card";
 import { Leaderboard } from "@/components/leaderboard";
-import { AcademicGrowthChart } from "@/components/academic-growth-chart";
 import { BioBankActivity } from "@/components/bio-bank-activity";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { fetchStudentData } from "@/lib/api";
-import { AlertCircle } from "lucide-react";
 
-// --- INTERFACES (Tetap sama sesuai keinginanmu) ---
+// --- INTERFACES ---
 interface HistoryItem {
   item: string;
   skor: number | string;
   isGS: boolean;
+  label?: string;
+  gs?: number;
+  semester?: string;
 }
 interface RankItem {
   nama: string;
@@ -66,14 +66,20 @@ export default function DashboardPage() {
     "Semester Ganjil" | "Semester Genap"
   >("Semester Ganjil");
 
+  // Use ref to prevent race conditions
+  const isInitialLoadRef = useRef(true);
+  const isFetchingRef = useRef(false);
+
   const getSemesterNum = (s: string) => (s === "Semester Genap" ? 2 : 1);
 
-  // FIXED: Memasukkan dependensi yang benar agar tidak berubah-ubah ukurannya
+  // Load data function
   const loadData = useCallback(
     async (semLabel?: "Semester Ganjil" | "Semester Genap") => {
-      if (!user?.email) return;
+      if (!user?.email || isFetchingRef.current) return;
 
-      if (!studentData) setIsLoading(true);
+      isFetchingRef.current = true;
+      setIsLoading(true);
+      setStudentData(null);
 
       try {
         const targetSem = semLabel || semester;
@@ -83,29 +89,93 @@ export default function DashboardPage() {
           getSemesterNum(targetSem),
         );
         setStudentData(data);
+
+        // Update semester state if this is initial load
+        if (isInitialLoadRef.current && semLabel) {
+          setSemester(semLabel);
+          isInitialLoadRef.current = false;
+        }
+
         setError(null);
       } catch (err) {
         setError("Gagal memuat data terbaru.");
       } finally {
         setIsLoading(false);
         setIsRefreshing(false);
+        isFetchingRef.current = false;
       }
     },
-    [user?.email, user?.nisn, semester], // Hanya refresh jika info user atau semester berubah
+    [user?.email, user?.nisn, semester],
   );
 
-  // FIXED: Dependency array dibuat konstan agar tidak memicu error "changed size"
+  // Initial load - get semesterAktif and load correct semester
   useEffect(() => {
-    if (user) {
-      loadData();
+    if (user && isInitialLoadRef.current && !isFetchingRef.current) {
+      isFetchingRef.current = true;
+
+      const fetchInitialData = async () => {
+        setIsLoading(true);
+
+        try {
+          // Step 1: Fetch semester 1 to get semesterAktif
+          console.log(
+            "[Dashboard] Step 1: Fetching semester 1 for semesterAktif...",
+          );
+          const data1 = await fetchStudentData(user.email, user.nisn || "", 1);
+
+          // Step 2: Get semesterAktif from response
+          const activeSemester = data1.profile?.semesterAktif || "1";
+          console.log("[Dashboard] semesterAktif received:", activeSemester);
+
+          // Step 3: Determine correct semester
+          const correctSemNum = activeSemester === "2" ? 2 : 1;
+          const correctSemLabel =
+            correctSemNum === 2 ? "Semester Genap" : "Semester Ganjil";
+          console.log(
+            "[Dashboard] Will load:",
+            correctSemLabel,
+            "(semester",
+            correctSemNum,
+            ")",
+          );
+
+          // Step 4: Set semester state FIRST (before fetching)
+          setSemester(correctSemLabel);
+
+          // Step 5: Fetch the correct semester data
+          console.log("[Dashboard] Step 2: Fetching correct semester data...");
+          const correctData = await fetchStudentData(
+            user.email,
+            user.nisn || "",
+            correctSemNum,
+          );
+
+          // Step 6: Set the data
+          console.log("[Dashboard] Setting studentData with correct semester");
+          setStudentData(correctData);
+
+          // Mark initial load as done
+          isInitialLoadRef.current = false;
+
+          setError(null);
+        } catch (err) {
+          console.error("[Dashboard] Error:", err);
+          setError("Gagal memuat data terbaru.");
+        } finally {
+          setIsLoading(false);
+          isFetchingRef.current = false;
+        }
+      };
+
+      fetchInitialData();
     }
-  }, [user?.email, loadData]);
+  }, [user?.email, user?.nisn]);
 
   const handleSemesterChange = (
     newSem: "Semester Ganjil" | "Semester Genap",
   ) => {
+    isInitialLoadRef.current = false; // No longer initial load
     setSemester(newSem);
-    setStudentData(null);
     loadData(newSem);
   };
 
@@ -143,7 +213,7 @@ export default function DashboardPage() {
         user={user as any}
         onRefresh={handleRefresh}
         isRefreshing={isRefreshing}
-        currentSemester={semester} // Kirim state semester ke sini
+        currentSemester={semester}
         displayClass={studentData?.profile?.kelas}
       />
 

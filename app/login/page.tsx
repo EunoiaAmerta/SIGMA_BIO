@@ -66,7 +66,7 @@ export default function LoginPage() {
 
   return (
     <div
-      className="min-h-screen bg-[#06370b] flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-hidden"
+      className="min-h-screen bg-[#06370b] flex items-center justify-center p-3 sm:p-4 md:p-6"
       style={{
         backgroundColor: "#06370b",
       }}
@@ -120,16 +120,19 @@ export default function LoginPage() {
       <div className="w-full max-w-md max-h-screen overflow-hidden flex flex-col">
         {/* Header - Outside the card, above logo */}
         <div className="text-center mb-2 sm:mb-3">
-          <h1 className="text-clamp-2xl sm:text-clamp-3xl font-bold text-white mb-0.5 sm:mb-1">
+          <h1
+            className="text-clamp-2xl sm:text-clamp-3xl font-bold text-white mb-0.5 sm:mb-1"
+            style={{ fontFamily: "var(--font-crimson-text)" }}
+          >
             SIGMA
           </h1>
-          <p className="text-xs text-white leading-tight">
+          <p className="text-xs text-white leading-tight mb-8 -mt-4">
             Sistem Informasi Golden Star dan Monitoring Akademik
           </p>
         </div>
 
         {/* Login Card */}
-        <Card className="p-3 sm:p-4 shadow-lg border-0 bg-white/70 flex-shrink-0">
+        <Card className="p-3 sm:p-4 shadow-neon-login border-0 bg-white/70 flex-shrink-0">
           {/* Logo inside the login box */}
           <div className="flex items-center justify-center mb-2 sm:mb-3">
             <img
@@ -218,13 +221,18 @@ export default function LoginPage() {
         </Card>
 
         {/* Footer */}
-        <div className="text-center mt-2 sm:mt-3 flex-shrink-0">
+        {/* Menambahkan mt-auto akan mendorong elemen ini ke paling bawah container jika ada ruang */}
+        {/* Atau gunakan margin top yang sangat besar untuk mendorongnya menjauh dari card */}
+        <div className="text-center mt-12 sm:mt-20 flex-shrink-0">
           <img
             src="/logo.png"
             alt="Logo"
             className="w-32 h-auto sm:w-40 md:w-48 mx-auto"
           />
-          <p className="text-xs text-yellow-400 italic mt-1">
+          <p
+            className="text-lg text-yellow-400 italic mt-1"
+            style={{ fontFamily: "var(--font-kalam)" }}
+          >
             Pantau Prestasi, Bangun Motivasi
           </p>
         </div>
