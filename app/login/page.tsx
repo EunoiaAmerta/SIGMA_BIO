@@ -65,32 +65,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="light min-h-screen bg-[#06370b] flex items-center justify-center p-3 sm:p-4 md:p-6">
+    <div className="min-h-screen bg-[#06370b] flex items-center justify-center p-3 sm:p-4 md:p-6">
       {/* Force light mode styles (scoped to login page only) */}
       <style jsx global>{`
         .login-page {
-          --background: #ffffff !important;
-          --foreground: #000000 !important;
-          --card: #ffffff !important;
-          --card-foreground: #000000 !important;
-          --popover: #ffffff !important;
-          --popover-foreground: #000000 !important;
-          --primary: #06370b !important;
-          --primary-foreground: #ffffff !important;
-          --secondary: #f3f4f6 !important;
-          --secondary-foreground: #000000 !important;
-          --muted: #f3f4f6 !important;
-          --muted-foreground: #000000 !important;
-          --accent: #f3f4f6 !important;
-          --accent-foreground: #000000 !important;
-          --destructive: #ef4444 !important;
-          --destructive-foreground: #ffffff !important;
-          --border: #e5e7eb !important;
-          --input: #e5e7eb !important;
-          --ring: #06370b !important;
-        }
-
-        .dark .login-page {
           --background: #ffffff !important;
           --foreground: #000000 !important;
           --card: #ffffff !important;

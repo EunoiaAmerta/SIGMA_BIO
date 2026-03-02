@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
   --background: #b9cfbd;
   --foreground: #1f2937;
@@ -36,47 +34,6 @@
   --sidebar-accent: #d1fae5;
   --sidebar-accent-foreground: #065f46;
   --sidebar-border: #d1fae5;
-  --sidebar-ring: #10b981;
-  --shadow-x: 0px;
-  --shadow-y: 1px;
-  --shadow-blur: 2px;
-  --shadow-spread: 0px;
-  --shadow-opacity: 0.05;
-  --shadow-color: #000000;
-}
-
-.dark {
-  --background: #304633;
-  --foreground: #f1f5f9;
-  --card: #1e3a1f;
-  --card-foreground: #f1f5f9;
-  --popover: #1e3a1f;
-  --popover-foreground: #f1f5f9;
-  --primary: #10b981;
-  --primary-foreground: #ffffff;
-  --secondary: #1a3320;
-  --secondary-foreground: #d1fae5;
-  --muted: #1a3320;
-  --muted-foreground: #9ca3af;
-  --accent: #047857;
-  --accent-foreground: #d1fae5;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #2d4a30;
-  --input: #2d4a30;
-  --ring: #10b981;
-  --chart-1: #10b981;
-  --chart-2: #6ee7b7;
-  --chart-3: #a7f3d0;
-  --chart-4: #d1fae5;
-  --chart-5: #ecfdf5;
-  --sidebar: #1e3a1f;
-  --sidebar-foreground: #f1f5f9;
-  --sidebar-primary: #10b981;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #047857;
-  --sidebar-accent-foreground: #d1fae5;
-  --sidebar-border: #2d4a30;
   --sidebar-ring: #10b981;
   --shadow-x: 0px;
   --shadow-y: 1px;
@@ -260,12 +217,6 @@
     --neon-color: rgba(0, 0, 0, 0.8);
   }
 
-  .dark {
-    --grid-color: #ffffff;
-    --grid-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    --neon-color: rgba(255, 255, 255, 0.8);
-  }
-
   body {
     background-image:
       linear-gradient(var(--grid-color) 1px, transparent 1px),
@@ -307,10 +258,6 @@
   [data-slot="card"]:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  .dark [data-slot="card"]:hover {
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
   }
 
   /* Shadow for Login Card */

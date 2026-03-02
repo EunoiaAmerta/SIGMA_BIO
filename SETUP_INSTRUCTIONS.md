@@ -7,11 +7,11 @@ BioExplorer Pro is an advanced biology academic portal that tracks student achie
 ## Technology Stack
 
 - **Framework**: Next.js 16 with React 19
-- **Styling**: Tailwind CSS v4 with dark mode support
+- **Styling**: Tailwind CSS v4 (light mode only)
 - **UI Components**: shadcn/ui
 - **Charts**: Recharts
 - **Icons**: Lucide React
-- **Theme Management**: next-themes
+- **Theme Management**: (none, light only)
 
 ## Prerequisites
 
@@ -47,6 +47,7 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret_here
 Your Google Sheet should have the following columns:
 
 **Required Columns:**
+
 - NO
 - NISN
 - Nama Lengkap
@@ -56,6 +57,7 @@ Your Google Sheet should have the following columns:
 - Saldo Akhir GS
 
 **Semester 1 Columns (S1):**
+
 - Rata Harian (90%) S1
 - Nilai Asli UAS S1
 - Redeem GS UAS S1
@@ -68,15 +70,18 @@ Your Google Sheet should have the following columns:
 - SALDO SAAT INI S1
 
 **Semester 2 Columns (S2):**
+
 - Similar structure with S2 suffix
 
 **Task Columns:**
+
 - Tugas 1-6 Bab 1 S1 (and corresponding GS columns)
 - Similar for S2
 
 ### 3. Google Sheets API Endpoint
 
 The application uses this endpoint to fetch student data:
+
 ```
 https://script.google.com/macros/s/AKfycbwZ-3w-pZsWwalaevZzfbVa1ukMuxbuXqxCAfKziEQMej49y2z1xQ1h6QH9av3EyiD0/exec
 ```
@@ -103,26 +108,30 @@ npm run start
 ## Features
 
 ### 1. Authentication
+
 - Email-based login with NISN validation
 - Session persistence using localStorage
 - Automatic redirect to login for unauthenticated users
 
 ### 2. Dashboard
+
 - **Personal Ranking Card**: Shows current rank, score, and Golden Star balance
 - **Top 10 Leaderboard**: Displays top performing students with rank badges
 - **Academic Growth Chart**: Visualizes score distribution and class averages
 - **Bio-Bank Activity**: Shows Golden Star transactions and detailed grade breakdown by chapter
 
 ### 3. Semester Switching
+
 - Toggle between "Semester Ganjil" (Odd) and "Semester Genap" (Even)
 - All data updates dynamically based on selected semester
 
 ### 4. Theme Support
-- Light/Dark mode toggle
-- Theme preference persisted to localStorage
-- Emerald green color scheme optimized for both themes
+
+- Light mode only
+- Emerald green color scheme
 
 ### 5. Data Refresh
+
 - Manual "Sync Data" button with rotating animation
 - Automatic refresh every 60 minutes
 - Real-time data fetching from Google Sheets
@@ -138,7 +147,6 @@ components/
 ├── academic-growth-chart.tsx # Charts and analytics
 ├── bio-bank-activity.tsx     # Transaction and grade breakdown
 ├── semester-selector.tsx     # Semester switcher
-├── theme-toggle.tsx          # Dark/light mode toggle
 └── dashboard-skeleton.tsx    # Loading skeletons
 
 app/
@@ -172,7 +180,6 @@ hooks/
 - **Secondary**: Emerald light (#ecfdf5)
 - **Accent**: Emerald dark (#d1fae5)
 - **Destructive**: Red (#ef4444)
-- **Dark Mode**: Deep slate backgrounds with emerald accents
 
 ## Performance Optimizations
 
@@ -185,22 +192,26 @@ hooks/
 ## Troubleshooting
 
 ### "Student profile not found"
+
 - Verify email in Google Sheet matches login email exactly
 - Check that the Google Sheet endpoint is accessible
 - Ensure NISN matches the data in the sheet
 
 ### Data not refreshing
+
 - Check network connection
 - Verify Google Sheets endpoint is working
 - Check browser console for API errors
 - Try manual refresh with "Sync Data" button
 
 ### Authentication issues
+
 - Clear localStorage and cookies
 - Check Google OAuth credentials
 - Verify redirect URIs in Google Cloud Console
 
 ### Styling issues
+
 - Clear browser cache
 - Ensure Tailwind CSS is properly compiled
 - Check that all dependencies are installed
@@ -210,18 +221,22 @@ hooks/
 The application can be deployed to Vercel, Netlify, or any Next.js-compatible hosting:
 
 ### Vercel Deployment
+
 ```bash
 vercel deploy
 ```
 
 ### Environment Variables (Production)
+
 Add the same environment variables to your hosting platform:
+
 - NEXT_PUBLIC_GOOGLE_CLIENT_ID
 - GOOGLE_CLIENT_SECRET
 
 ## Support
 
 For issues or questions, please check:
+
 1. Browser console for error messages
 2. Network tab to verify API calls
 3. Google Sheet data structure and formatting

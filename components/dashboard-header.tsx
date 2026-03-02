@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth-provider";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Leaf, LogOut, RotateCw } from "lucide-react";
@@ -82,9 +81,6 @@ export function DashboardHeader({
               />
               <span className="hidden sm:inline">Sync Data</span>
             </Button>
-
-            {/* Theme Toggle */}
-            <ThemeToggle />
 
             {/* Logout Button */}
             <Button
