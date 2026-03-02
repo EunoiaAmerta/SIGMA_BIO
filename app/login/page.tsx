@@ -65,15 +65,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div
-      className="min-h-screen bg-[#06370b] flex items-center justify-center p-3 sm:p-4 md:p-6"
-      style={{
-        backgroundColor: "#06370b",
-      }}
-    >
-      {/* Force light mode styles */}
+    <div className="light min-h-screen bg-[#06370b] flex items-center justify-center p-3 sm:p-4 md:p-6">
+      {/* Force light mode styles (scoped to login page only) */}
       <style jsx global>{`
-        :root {
+        .login-page {
           --background: #ffffff !important;
           --foreground: #000000 !important;
           --card: #ffffff !important;
@@ -94,7 +89,8 @@ export default function LoginPage() {
           --input: #e5e7eb !important;
           --ring: #06370b !important;
         }
-        .dark {
+
+        .dark .login-page {
           --background: #ffffff !important;
           --foreground: #000000 !important;
           --card: #ffffff !important;
@@ -117,7 +113,7 @@ export default function LoginPage() {
         }
       `}</style>
 
-      <div className="w-full max-w-md max-h-screen overflow-hidden flex flex-col">
+      <div className="login-page w-full max-w-md max-h-screen overflow-hidden flex flex-col">
         {/* Header - Outside the card, above logo */}
         <div className="text-center mb-2 sm:mb-3">
           <h1
@@ -131,16 +127,19 @@ export default function LoginPage() {
           </p>
         </div>
 
+        {/* Logo Sekolah */}
+
+        <div className="flex justify-center mb-3 sm:mb-4">
+          <img
+            src="/logo_sekolah.png"
+            alt="Logo Sekolah"
+            className="w-14 h-auto sm:w-16 md:w-20"
+          />
+        </div>
+
         {/* Login Card */}
         <Card className="p-3 sm:p-4 shadow-neon-login border-0 bg-white/70 flex-shrink-0">
           {/* Logo inside the login box */}
-          <div className="flex items-center justify-center mb-2 sm:mb-3">
-            <img
-              src="/logo_sekolah.png"
-              alt="Logo Sekolah"
-              className="w-14 h-auto sm:w-16 md:w-20"
-            />
-          </div>
 
           <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3">
             {/* Email Input */}

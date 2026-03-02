@@ -315,14 +315,22 @@
 
   /* Shadow for Login Card */
   .shadow-neon-login {
+    box-shadow: none;
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.2s ease;
+  }
+
+  .shadow-neon-login:hover {
+    transform: translateY(-2px);
     box-shadow:
       0 0 5px rgba(255, 255, 255, 0.8),
       0 0 15px rgba(255, 255, 255, 0.6),
       -5px 0 10px 10px rgba(255, 255, 255, 0.5),
       5px 0 10px 10px rgba(255, 255, 255, 0.5);
-    position: relative;
-    z-index: 10;
-    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
   .shadow-neon-login::before {
