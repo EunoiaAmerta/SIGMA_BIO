@@ -65,7 +65,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#06370b] flex items-center justify-center p-3 sm:p-4 md:p-6">
+    <div className="min-h-screen bg-[#d7e4d9] flex items-center justify-center p-3 sm:p-4 md:p-6">
       {/* Force light mode styles (scoped to login page only) */}
       <style jsx global>{`
         .login-page {
@@ -75,7 +75,7 @@ export default function LoginPage() {
           --card-foreground: #000000 !important;
           --popover: #ffffff !important;
           --popover-foreground: #000000 !important;
-          --primary: #06370b !important;
+          --primary: #145a41 !important;
           --primary-foreground: #ffffff !important;
           --secondary: #f3f4f6 !important;
           --secondary-foreground: #000000 !important;
@@ -85,26 +85,13 @@ export default function LoginPage() {
           --accent-foreground: #000000 !important;
           --destructive: #ef4444 !important;
           --destructive-foreground: #ffffff !important;
-          --border: #e5e7eb !important;
-          --input: #e5e7eb !important;
-          --ring: #06370b !important;
+          --border: #dce5e1 !important;
+          --input: #dce5e1 !important;
+          --ring: #1f7a5c !important;
         }
       `}</style>
 
       <div className="login-page w-full max-w-md max-h-screen overflow-hidden flex flex-col">
-        {/* Header - Outside the card, above logo */}
-        <div className="text-center mb-2 sm:mb-3">
-          <h1
-            className="text-clamp-2xl sm:text-clamp-3xl font-bold text-white mb-0.5 sm:mb-1"
-            style={{ fontFamily: "var(--font-crimson-text)" }}
-          >
-            SIGMA
-          </h1>
-          <p className="text-xs text-white leading-tight mb-8 -mt-4">
-            Sistem Informasi Golden Star dan Monitoring Akademik
-          </p>
-        </div>
-
         {/* Logo Sekolah */}
 
         <div className="flex justify-center mb-3 sm:mb-4">
@@ -116,9 +103,22 @@ export default function LoginPage() {
         </div>
 
         {/* Login Card */}
-        <Card className="p-3 sm:p-4 shadow-neon-login border-0 bg-white/70 flex-shrink-0">
-          {/* Logo inside the login box */}
-
+        <Card className="p-3 sm:p-4 shadow-neon-login border-0 bg-white flex-shrink-0">
+          {/* Title inside the login box */}
+          <div className="text-center mb-2 sm:mb-3">
+            <h1
+              className="text-clamp-2xl sm:text-clamp-3xl font-bold text-[#145A41] mb-0.5 sm:mb-1"
+              style={{ fontFamily: "var(--font-crimson-text)" }}
+            >
+              SIGMA
+            </h1>
+            <p
+              className="text-xl"
+              style={{ fontFamily: "var(--font-kalam)", color: "#7a6200" }}
+            >
+              Pantau Prestasi, Bangun Motivasi
+            </p>
+          </div>
           <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3">
             {/* Email Input */}
             <div className="space-y-1">
@@ -160,7 +160,7 @@ export default function LoginPage() {
                 className="w-3 h-3 mr-2"
               />
               <label htmlFor="rememberMe" className="text-xs text-foreground">
-                Remember username and password
+                Ingat saya di perangkat ini
               </label>
             </div>
 
@@ -177,7 +177,7 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-9 sm:h-10 bg-primary hover:bg-primary/90 text-white font-medium text-sm"
+              className="w-full h-9 sm:h-10 bg-[#145A41] hover:bg-[#1F7A5C] text-white font-medium text-sm"
             >
               {isLoading ? (
                 <>
@@ -200,18 +200,12 @@ export default function LoginPage() {
         {/* Footer */}
         {/* Menambahkan mt-auto akan mendorong elemen ini ke paling bawah container jika ada ruang */}
         {/* Atau gunakan margin top yang sangat besar untuk mendorongnya menjauh dari card */}
-        <div className="text-center mt-12 sm:mt-20 flex-shrink-0">
+        <div className="text-center mt-10 sm:mt-10 flex-shrink-0">
           <img
-            src="/logo.png"
+            src="/logo_dna.png"
             alt="Logo"
             className="w-32 h-auto sm:w-40 md:w-48 mx-auto"
           />
-          <p
-            className="text-lg text-yellow-400 italic mt-1"
-            style={{ fontFamily: "var(--font-kalam)" }}
-          >
-            Pantau Prestasi, Bangun Motivasi
-          </p>
         </div>
       </div>
     </div>
