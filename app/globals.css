@@ -212,18 +212,25 @@
 
   /* Grid Background & Neon Effects */
   :root {
+    /* grid colour now controlled through class (.grid-background) with low opacity
+       original variable kept for backwards compatibility if needed */
     --grid-color: #000000;
     --grid-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     --neon-color: rgba(0, 0, 0, 0.8);
   }
 
   body {
+    /* grid background removed from <body> – restrict pattern to specific sections */
+    box-shadow: inset 0 0 100px var(--grid-shadow);
+  }
+
+  /* lightweight grid used only where needed (hero/intro areas) */
+  .grid-background {
     background-image:
-      linear-gradient(var(--grid-color) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
     background-position: -1px -1px;
-    box-shadow: inset 0 0 100px var(--grid-shadow);
   }
 
   /* Neon Card Effects */

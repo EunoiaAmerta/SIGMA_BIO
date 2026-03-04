@@ -31,14 +31,14 @@ export function DashboardHeader({
   };
   console.log("Data User di Header:", user);
   return (
-    <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-border">
+    <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-border grid-background">
       <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
         <div className="flex items-center justify-between gap-2 sm:gap-4">
           {/* Logo & Title */}
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 flex items-center justify-center shadow-md">
               <img
-                src="logo.png"
+                src="logo_dna.png"
                 alt="Logo"
                 className="w-full h-auto text-white"
               />
